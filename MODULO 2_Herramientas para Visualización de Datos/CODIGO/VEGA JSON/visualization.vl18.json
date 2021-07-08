@@ -1,0 +1,22 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "height": 500,
+  "width": 500,
+  "data": {
+    "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+    "format": {
+      "type": "topojson",
+      "feature": "land"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "fill": "#da8289",
+    "stroke": "#0c0c0c",
+    "strokeWidth": 1
+  },
+  "config": {}
+}

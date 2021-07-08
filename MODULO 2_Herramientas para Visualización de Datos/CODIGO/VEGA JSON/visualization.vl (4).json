@@ -1,0 +1,19 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "data/seattle-weather.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "weather",
+      "type": "nominal"
+    },
+    "y": {
+      "field": "weather",
+      "aggregate": "count",
+      "type": "quantitative"
+    }
+  },
+  "config": {}
+}

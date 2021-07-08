@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1 align="center"> Intento de Ventas y Ventas concretas de Estados </h1>
+<style>
+text{
+  font-size:12px;
+}
+.mainBars rect{
+  shape-rendering: auto;
+  fill-opacity: 0;
+  stroke-width: 0.5px;
+  stroke: rgb(0, 0, 0);
+  stroke-opacity: 0;
+}
+.subBars{
+  shape-rendering:crispEdges;
+}
+.edges{
+  stroke:none;
+  fill-opacity:0.5;
+}
+.header{
+  text-anchor:middle;
+  font-size:16px;
+}
+line{
+  stroke:grey;
+}
+</style>
+<body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://vizjs.org/viz.v1.1.0.min.js"></script>
+<script>
+
+var data=[['Tecnologia','CA',16,0],
+['RopaYModa','CA',1278,4],
+['Educación','CA',27,0],
+['Educación','CA',58,0],
+['VidaYSalud','CA',1551,15],
+['Carros','CA',141,0],
+['Tecnologia','AZ',5453,35],
+['RopaYModa','AZ',683,1],
+['Educación','AZ',862,0],
+['VidaYSalud','AZ',6228,30],
+['Tecnologia','AL',15001,449],
+['RopaYModa','AL',527,3],
+['Educación','AL',836,0],
+['Educación','AL',28648,1419],
+['VidaYSalud','AL',3,0],
+['Tecnologia','CO',13,0],
+['RopaYModa','CO',396,0],
+['Educación','CO',362,0],
+['Educación','CO',78,10],
+['VidaYSalud','CO',2473,32],
+['Carros','CO',2063,64],
+['Educación','DE',203,0],
+['VidaYSalud','DE',686,2],
+['Carros','DE',826,0],
+['Tecnologia','KS',1738,110],
+['RopaYModa','KS',12925,13],
+['Educación','KS',15413,0],
+['RopaYModa','GA',2166,2],
+['Educación','GA',86,0],
+['Educación','GA',348,3],
+['VidaYSalud','GA',4244,18],
+['Carros','GA',1536,1],
+['RopaYModa','IA',351,0],
+['VidaYSalud','IA',405,1],
+['RopaYModa','IL',914,1],
+['Educación','IL',127,0],
+['VidaYSalud','IL',1470,7],
+['Carros','IL',516,1],
+['Tecnologia','IN',43,0],
+['RopaYModa','IN',667,1],
+['Educación','IN',172,0],
+['Educación','IN',149,1],
+['VidaYSalud','IN',1380,5],
+['Carros','IN',791,23],
+['RopaYModa','FL',1,0],
+['VidaYSalud','FL',1,0],
+['RopaYModa','MD',1070,1],
+['VidaYSalud','MD',1171,2],
+['Carros','MD',33,0],
+['Educación','TX',1,0],
+['RopaYModa','MS',407,0],
+['Educación','MS',3,0],
+['VidaYSalud','MS',457,2],
+['Carros','MS',20,0],
+['RopaYModa','NC',557,0],
+['Educación','NC',167,0],
+['Educación','NC',95,1],
+['VidaYSalud','NC',1090,5],
+['Carros','NC',676,6],
+['Tecnologia','NM',1195,99],
+['RopaYModa','NM',350,3],
+['Educación','NM',212,0],
+['VidaYSalud','NM',1509,8],
+['Tecnologia','NV',3899,389],
+['RopaYModa','NV',147,0],
+['Educación','NV',455,0],
+['Educación','NV',1,1],
+['VidaYSalud','NV',4100,16],
+['Tecnologia','OH',12,0],
+['RopaYModa','OH',634,2],
+['Educación','OH',749,0],
+['Educación','OH',119,1],
+['VidaYSalud','OH',3705,19],
+['Carros','OH',3456,25],
+['RopaYModa','PA',828,2],
+['Educación','PA',288,0],
+['Educación','PA',141,0],
+['VidaYSalud','PA',2625,7],
+['Carros','PA',1920,10],
+['RopaYModa','SC',1146,2],
+['Educación','SC',212,0],
+['Educación','SC',223,4],
+['VidaYSalud','SC',1803,6],
+['Carros','SC',761,8],
+['RopaYModa','TN',527,0],
+['Educación','TN',90,0],
+['VidaYSalud','TN',930,4],
+['Carros','TN',395,1],
+['Tecnologia','ME',7232,58],
+['RopaYModa','ME',1272,0],
+['Educación','ME',1896,0],
+['Educación','ME',1,0],
+['VidaYSalud','ME',10782,33],
+['Carros','ME',1911,3],
+['RopaYModa','VA',495,0],
+['Educación','VA',32,0],
+['Educación','VA',7,0],
+['VidaYSalud','VA',1557,12],
+['Carros','VA',24,0],
+['RopaYModa','WA',460,1],
+['Educación','WA',88,3],
+['VidaYSalud','WA',956,3],
+['RopaYModa','WV',232,0],
+['Educación','WV',71,0],
+['VidaYSalud','WV',575,2],
+['Carros','WV',368,3]
+];
+var color ={Carros:"#3366CC", VidaYSalud:"#DC3912",  Tecnologia:"#FF9900", Educación:"#109618", Educación:"#990099", RopaYModa:"#0099C6"};
+var svg = d3.select("body").append("svg").attr("width", 960).attr("height", 800);
+
+svg.append("text").attr("x",250).attr("y",70)
+  .attr("class","header").text("Intento de Ventas");
+  
+svg.append("text").attr("x",750).attr("y",70)
+  .attr("class","header").text("Ventas");
+
+var g =[svg.append("g").attr("transform","translate(150,100)")
+    ,svg.append("g").attr("transform","translate(650,100)")];
+
+var bp=[ viz.bP()
+    .data(data)
+    .min(12)
+    .pad(1)
+    .height(600)
+    .width(200)
+    .barSize(35)
+    .fill(d=>color[d.primary])    
+  ,viz.bP()
+    .data(data)
+    .value(d=>d[3])
+    .min(12)
+    .pad(1)
+    .height(600)
+    .width(200)
+    .barSize(35)
+    .fill(d=>color[d.primary])
+];
+    
+[0,1].forEach(function(i){
+  g[i].call(bp[i])
+  
+  g[i].append("text").attr("x",-50).attr("y",-8).style("text-anchor","middle").text("Interes");
+  g[i].append("text").attr("x", 250).attr("y",-8).style("text-anchor","middle").text("Estado");
+  
+  g[i].append("line").attr("x1",-100).attr("x2",0);
+  g[i].append("line").attr("x1",200).attr("x2",300);
+  
+  g[i].append("line").attr("y1",610).attr("y2",610).attr("x1",-100).attr("x2",0);
+  g[i].append("line").attr("y1",610).attr("y2",610).attr("x1",200).attr("x2",300);
+  
+  g[i].selectAll(".mainBars")
+    .on("mouseover",mouseover)
+    .on("mouseout",mouseout);
+
+  g[i].selectAll(".mainBars").append("text").attr("class","label")
+    .attr("x",d=>(d.part=="primary"? -30: 30))
+    .attr("y",d=>+6)
+    .text(d=>d.key)
+    .attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+  
+  g[i].selectAll(".mainBars").append("text").attr("class","perc")
+    .attr("x",d=>(d.part=="primary"? -100: 80))
+    .attr("y",d=>+6)
+    .text(function(d){ return d3.format("0.0%")(d.percent)})
+    .attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+});
+
+function mouseover(d){
+  [0,1].forEach(function(i){
+    bp[i].mouseover(d);
+    
+    g[i].selectAll(".mainBars").select(".perc")
+    .text(function(d){ return d3.format("0.0%")(d.percent)});
+  });
+}
+function mouseout(d){
+  [0,1].forEach(function(i){
+    bp[i].mouseout(d);
+    
+    g[i].selectAll(".mainBars").select(".perc")
+    .text(function(d){ return d3.format("0.0%")(d.percent)});
+  });
+}
+d3.select(self.frameElement).style("height", "800px");
+</script>
+</body>
+</html>

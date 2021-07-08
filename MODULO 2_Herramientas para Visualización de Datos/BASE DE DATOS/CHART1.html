@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Expenses', 'Amount'],
+          ['Rent', 7000],
+          ['Grocery', 3000],
+          ['Transport', 800],
+          ['Current', 300],
+          ['School Fee', 2000],
+          ['Savings', 1900]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Primer trabajo de Charts',
+            subtitle: 'Paul Cahuana Nina',
+          },
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+  
+
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Osos', 'Delfines', 'Ballenas'],
+          ['2014', 8, 150, 80],
+          ['2015', 54, 77, 54],
+          ['2016', 93, 32, 100],
+          ['2017', 116, 11, 76],
+          ['2017', 137, 6, 93],
+          ['2017', 184, 1, 72]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Representacion de Osos, Delfines y Ballenas por año',
+            subtitle: 'Paul Cahuana Nina',
+          },
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material2'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+
+  </head>
+  <body>
+    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="barchart_material2" style="width: 900px; height: 500px;"></div>	
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+</html>
